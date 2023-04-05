@@ -51,23 +51,28 @@ public class controlador extends HttpServlet {
                         request.setAttribute("aprendiz", lista);
                         break;
                     case "Agregar":
-                        String Cedula=request.getParameter("txtCedula");
-                        String Nombre=request.getParameter("txtNombre");
-                        String Apellido=request.getParameter("txtApellido");
-                     //   String Email=request.getParameter("txtEmail");
-                        
+                         Personas nPersona = new Personas();
+
+                        String cedula=request.getParameter("txtCedula");
+                        String nombre=request.getParameter("txtNombre");
+                        String apellido=request.getParameter("txtApellido");
+                        String email=request.getParameter("txtEmail");
                         String IDRol=request.getParameter("txtIDRol");
-                        //String IDExcusa=request.getParameter("txtExcusa");
-                        pm.setcedula(Cedula);
-                        pm.setNombre(Nombre);
-                        pm.setapellido(Apellido);
-                //        pm.setemail(Email);
+                        String IDExcusa=request.getParameter("txtExcusa");
                         
-                        pm.setIdrol(IDRol);
-                        //pm.setIdexcusa(IDExcusa);
+                        nPersona.setcedula(cedula);
+                        nPersona.setNombre(nombre);
+                        nPersona.setapellido(apellido);
+                        nPersona.setemail(email);
+                        nPersona.setIdrol(email);
+
+                        
+                        nPersona.setIdrol(IDRol);
+                        if(IDExcusa.length() > 0) pm.setIdexcusa(IDExcusa);
                         
                         
-                        pdao.agregar(pm);
+
+                        pdao.agregar(nPersona);
                         request.getRequestDispatcher("controlador?menu=Aprendiz&accion=Listar").forward(request, response);
                         break;
                     case "Editar":

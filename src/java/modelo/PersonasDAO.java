@@ -47,7 +47,7 @@ public class PersonasDAO {
     //operaciones CRUD
     
     public List listar(){
-        String sql="SELECT * FROM tbl_personas,tbl_usuario,tbl_rol WHERE tbl_personas.PK_id_personas = tbl_usuario.FK_id_personas AND tbl_personas.FK_id_rol=tbl_rol.PK_id_rol";
+        String sql="SELECT * FROM tbl_personas,tbl_usuario,tbl_rol WHERE tbl_personas.PK_id_personas = tbl_usuario.FK_id_personas AND tbl_personas.FK_id_rol=tbl_rol.PK_id_rol  ORDER BY PK_id_personas ASC";
         List<Personas>lista=new ArrayList<>();
         try {
             con=cn.conexion();
@@ -70,10 +70,7 @@ public class PersonasDAO {
         return lista;
     }
     public int agregar(Personas pm){     
-        
-       
-        
-        String sql="insert into tbl_personas(cedula, nombre,apellido,FK_id_rol)values(?,?,?,?)";
+       String sql="insert into tbl_personas(cedula, nombre,apellido,email,FK_id_rol) values(?,?,?,?,?)";
         try {
             con=cn.conexion();
             ps=con.prepareStatement(sql);
@@ -82,11 +79,14 @@ public class PersonasDAO {
             ps.setString(2,pm.getNombre());
             ps.setString(3,pm.getapellido());
    
-            ps.setString(4,pm.getIdrol());
+            ps.setString(4,pm.getemail());            
+            ps.setString(5,pm.getIdrol());
+
   
             
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println("err"+ e);
         }
         return r;
     }
@@ -127,10 +127,12 @@ public class PersonasDAO {
         return r;
     }
     public void eliminar(int id){
-        String sql="delete from tbl_personas where PK_id_personas="+id;
+        String sql="delete from tbl_usuario where FK_id_personas=?";
+        System.out.println(sql);
         try {
             con=cn.conexion();
             ps=con.prepareStatement(sql);
+            ps.setInt(1, id);              
             ps.executeUpdate();
         } catch (Exception e) {
         }
