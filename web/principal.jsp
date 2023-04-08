@@ -25,7 +25,7 @@
                       <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="controlador?menu=Home" target="myFrame">Home </a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="controlador?menu=Ficha" target="myFrame">Ficha</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="controlador?menu=Ficha&accion=listarFicha" target="myFrame">Ficha</a>
                     </li>
                     <li class="nav-item">
                       <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="controlador?menu=Aprendiz&accion=Listar" target="myFrame">Personas</a>

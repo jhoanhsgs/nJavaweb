@@ -55,14 +55,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="pm" items="${aprendiz}">
+                    <c:forEach var="Fc" items="${fichas}">
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>${fc.getId()}</td>
+                            <td>${fc.getNficha()}</td>
+                            <td>${fc.getNombre()}</td>
+                            <td>${fc.getFechaI()}</td>
+                            <td>${fc.getFechaF()}</td>
+                            <td>${fc.getFechaC()}</td>
                             <td>
                                 <a>Editar</a>
                                 <a>Eliminar</a>

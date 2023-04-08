@@ -47,29 +47,29 @@ public class FichaDAO {
     //operaciones CRUD
     
     public List listar(){
-        String sql="SELECT * FROM tblpersonas,tblusuario,tblrol WHERE tblpersonas.IDUsuario = tblusuario.IDUsuario AND tblpersonas.IDRol=tblrol.IDRol";
-        List<Personas>lista=new ArrayList<>();
+        String sql="SELECT * FROM tbl_ficha";
+        List<Ficha>lista1=new ArrayList<>();
         try {
             con=cn.conexion();
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();
             while (rs.next()){
-                Personas pm=new Personas();
-                pm.setId(rs.getInt(1));
-                pm.setcedula(rs.getString(2));
-                pm.setNombre(rs.getString(3));
-                pm.setapellido(rs.getString(4));
-                pm.setemail(rs.getString(5));
-                pm.setUser(rs.getString(9));
-                pm.setRol(rs.getString(13));
+                Ficha Fc=new Ficha();
+                Fc.setId(rs.getInt(1));
+                Fc.setNficha(rs.getString(2));
+                Fc.setFechaI(rs.getString(3));
+                Fc.setFechaF(rs.getString(4));
+                Fc.setFechaC(rs.getString(5));
+                Fc.setIdprogformacion(rs.getString(8));
                 
-                lista.add(pm);
+                
+                lista1.add(Fc);
             }
         } catch (Exception e) {
         }
-        return lista;
+        return lista1;
     }
-    public int agregar(Personas pm){     
+    /*public int agregar(Personas pm){     
         String sql="insert into tblpersonas(Cedula, Nombre,Apellido,email,IDUsuario,IDRol)values(?,?,?,?,?,?)";
         try {
             con=cn.conexion();
@@ -140,5 +140,5 @@ public class FichaDAO {
 
     public Personas listar(int idPersonas) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    }*/
 }

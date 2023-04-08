@@ -10,31 +10,25 @@ package modelo;
  */
 public class Ficha {
     int id;
-    String cedula;
+    String Nficha;
     String nombre;
-    String apellido;
-    String email;
-    String user;
-    String pass;
-    String rol;
-    String iduser;
-    String idrol;
+    String fechaI;
+    String fechaF;
+    String fechaC;
+    String idprogformacion;
     
-
+    
     public Ficha() {
     }
 
-    public Ficha(int id, String cedula, String nombre, String apellido, String email, String user,String pass, String rol,String iduser,String idrol) {
+    public Ficha(int id, String Nficha, String nombre, String fechaI, String fechaF, String fechaC, String idprogformacion) {
         this.id = id;
-        this.cedula = cedula;
+        this.Nficha = Nficha;
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.user = user;
-        this.pass = pass;
-        this.rol = rol;
-        this.iduser =iduser;
-        this.idrol = idrol;
+        this.fechaI = fechaI;
+        this.fechaF = fechaF;
+        this.fechaC = fechaC;
+        this.idprogformacion = idprogformacion;
     }
 
     public int getId() {
@@ -45,12 +39,12 @@ public class Ficha {
         this.id = id;
     }
 
-    public String getcedula() {
-        return cedula;
+    public String getNficha() {
+        return Nficha;
     }
 
-    public void setcedula(String cedula) {
-        this.cedula = cedula;
+    public void setNficha(String Nficha) {
+        this.Nficha = Nficha;
     }
 
     public String getNombre() {
@@ -61,62 +55,37 @@ public class Ficha {
         this.nombre = nombre;
     }
 
-    public String getapellido() {
-        return apellido;
+    public String getFechaI() {
+        return fechaI;
     }
 
-    public void setapellido(String apellido) {
-        this.apellido = apellido;
+    public void setFechaI(String fechaI) {
+        this.fechaI = fechaI;
     }
 
-    public String getemail() {
-        return email;
+    public String getFechaF() {
+        return fechaF;
     }
 
-    public void setemail(String email) {
-        this.email = email;
+    public void setFechaF(String fechaF) {
+        this.fechaF = fechaF;
     }
 
-    public String getUser() {
-        return user;
+    public String getFechaC() {
+        return fechaC;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-    
-    public  String getpass(){
-        return pass;
-    }
-    
-    public void setpass(String pass){
-        this.pass = pass;
-    }
-    
-    public  String getrol(){
-        return rol;
-    }
-    
-    public void setRol(String rol){
-        this.rol = rol;
+    public void setFechaC(String fechaC) {
+        this.fechaC = fechaC;
     }
 
-    public String getIduser() {
-        return iduser;
+    public String getIdprogformacion() {
+        return idprogformacion;
     }
 
-    public void setIduser(String iduser) {
-        this.iduser = iduser;
+    public void setIdprogformacion(String idprogformacion) {
+        this.idprogformacion = idprogformacion;
     }
-
-    public String getIdrol() {
-        return idrol;
-    }
-
-    public void setIdrol(String idrol) {
-        this.idrol = idrol;
-    }
-    
-    
+   
     
 }

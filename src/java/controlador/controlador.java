@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Ficha;
+import modelo.FichaDAO;
 import modelo.Personas;
 import modelo.PersonasDAO;
 
@@ -29,9 +31,13 @@ public class controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //personas
     Personas pm=new Personas();
     PersonasDAO pdao=new PersonasDAO();
     int ida;
+    //ficha
+    Ficha fc=new Ficha();
+    FichaDAO fdao=new FichaDAO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             //este menu recibe y nos ejectura la accion de ver los datos en la tabla 
@@ -42,6 +48,23 @@ public class controlador extends HttpServlet {
                 request.getRequestDispatcher("principal.jsp").forward(request, response);
             }
             if(menu.equals("Ficha")){
+                switch (accion) {
+                    case "listarFicha":
+                        List lista1=fdao.listar();
+                        request.setAttribute("fichas", lista1);
+                        break;
+                    case "Agregar":
+                        
+                        break;
+                    case "Editar":
+                        
+                        break;
+                    case "Eliminar":
+                        
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
                request.getRequestDispatcher("Ficha.jsp").forward(request, response);
             }
             if(menu.equals("Aprendiz")){
