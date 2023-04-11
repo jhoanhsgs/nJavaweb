@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/src/java/modelo/PersonasDAO.java</file>
             <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/web/Aprendiz.jsp</file>
-            <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/src/java/controlador/controlador.java</file>
             <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/src/java/modelo/FichaDAO.java</file>
+            <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/src/java/controlador/controlador.java</file>
+            <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/web/index.jsp</file>
             <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/src/java/modelo/Ficha.java</file>
-            <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/jhoan/Documents/NetBeansProjects/WebApplication2/web/Ficha.jsp</file>
         </group>
     </open-files>
 </project-private>

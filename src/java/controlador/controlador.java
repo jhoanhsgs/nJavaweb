@@ -6,6 +6,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,8 @@ public class controlador extends HttpServlet {
     //ficha
     Ficha fc=new Ficha();
     FichaDAO fdao=new FichaDAO();
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             //este menu recibe y nos ejectura la accion de ver los datos en la tabla 
@@ -51,16 +54,55 @@ public class controlador extends HttpServlet {
                 switch (accion) {
                     case "listarFicha":
                         List lista1=fdao.listar();
+                        List pmList = fdao.programas();
+
                         request.setAttribute("fichas", lista1);
+                        request.setAttribute("programas", pmList);
                         break;
                     case "Agregar":
+                        Ficha nFicha = new Ficha();
+
+                        String numFicha=request.getParameter("txtNFicha");
                         
-                        break;
+                        String fechaIni=request.getParameter("txtFechaIni");
+                        String fechaFin=request.getParameter("txtFechaFin");
+                        String programa=request.getParameter("program");
+
+                        
+                        nFicha.setNficha(numFicha);
+                        nFicha.setFechaI(fechaIni);
+                        nFicha.setFechaF(fechaFin);
+                        nFicha.setIdprogformacion(programa);
+
+                      
+                        fdao.agregar(nFicha);
+                        request.getRequestDispatcher("controlador?menu=Ficha&accion=listarFicha").forward(request, response);
+                        
+                        break;             
                     case "Editar":
-                        
+                        ida=Integer.parseInt(request.getParameter("id"));
+                        Ficha e=fdao.listar(ida);
+                        request.setAttribute("ficha", e);
+                        request.getRequestDispatcher("controlador?menu=Ficha&accion=listarFicha").forward(request, response);
                         break;
                     case "Eliminar":
+                        ida=Integer.parseInt(request.getParameter("id"));//captura el id de la fila para todo
+                        fdao.eliminar(ida);//ejecutamos el metodo eliminar dentro de la clase personasdao
+                        //listar datos actualizados
+                        request.getRequestDispatcher("controlador?menu=Ficha&accion=listarFicha").forward(request, response);
+                        break;
+                     case "Actualizar":
+                        String Cedula1=request.getParameter("txtCedula");
+                        String Nombre1=request.getParameter("txtNombre");
+                        String Apellido1=request.getParameter("txtApellido");
+                        String Email1=request.getParameter("txtEmail");
+                        String IDuser1=request.getParameter("txtIDusuario");
+                        String IDRol1=request.getParameter("txtIDRol");
                         
+                        
+                        fc.setNombre(Nombre1);
+                        pdao.Actualizar(pm);
+                        request.getRequestDispatcher("controlador?menu=Aprendiz&accion=Listar").forward(request, response);
                         break;
                     default:
                         throw new AssertionError();
@@ -96,10 +138,11 @@ public class controlador extends HttpServlet {
                         
 
                         pdao.agregar(nPersona);
+                        request.setAttribute("added", "true");
+
                         request.getRequestDispatcher("controlador?menu=Aprendiz&accion=Listar").forward(request, response);
                         break;
                     case "Editar":
-               
                         ida=Integer.parseInt(request.getParameter("id"));
                         Personas e=pdao.listarId(ida);
                         request.setAttribute("Personas", e);
@@ -112,6 +155,7 @@ public class controlador extends HttpServlet {
                         String Email1=request.getParameter("txtEmail");
                         String IDuser1=request.getParameter("txtIDusuario");
                         String IDRol1=request.getParameter("txtIDRol");
+                        
                         pm.setcedula(Cedula1);
                         pm.setNombre(Nombre1);
                         pm.setapellido(Apellido1);

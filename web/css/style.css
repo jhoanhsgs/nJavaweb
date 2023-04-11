@@ -63,7 +63,9 @@ a{
 .btn[type="submit"]:active{
   transform: scale(0.95);
 }
-
+.btn-table{
+    width: 80px;
+}
 
 
 

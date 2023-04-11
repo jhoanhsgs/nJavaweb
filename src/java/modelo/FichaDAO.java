@@ -45,9 +45,32 @@ public class FichaDAO {
     */
     
     //operaciones CRUD
-    
+    public List programas(){
+        List programs = new ArrayList<>();
+        try {
+            con=cn.conexion();
+            ps=con.prepareStatement("SELECT * FROM tbl_programacion");
+            rs=ps.executeQuery();
+            while (rs.next()){
+                Programa program=new Programa();
+                
+                program.setId(rs.getString(1));
+                program.setNombre(rs.getString(2));
+                program.setVigencia(rs.getString(3));
+                program.setVersion(rs.getString(4));
+                program.setFecha(rs.getString(5));
+
+                
+                programs.add(program);
+            }
+        } catch (Exception e) {
+            System.out.println("err: "+e);
+        }
+        
+        return programs;
+    }
     public List listar(){
-        String sql="SELECT * FROM tbl_ficha";
+        String sql="SELECT * FROM tbl_ficha,tbl_programacion where tbl_ficha.FK_id_programa_formacion = tbl_programacion.PK_id_programa_formacion";
         List<Ficha>lista1=new ArrayList<>();
         try {
             con=cn.conexion();
@@ -60,33 +83,63 @@ public class FichaDAO {
                 Fc.setFechaI(rs.getString(3));
                 Fc.setFechaF(rs.getString(4));
                 Fc.setFechaC(rs.getString(5));
-                Fc.setIdprogformacion(rs.getString(8));
-                
+                Fc.setIdprogformacion(rs.getString(7));
+                Fc.setNombre(rs.getString(8));
                 
                 lista1.add(Fc);
             }
         } catch (Exception e) {
+            System.out.println("err: "+e);
         }
         return lista1;
     }
-    /*public int agregar(Personas pm){     
-        String sql="insert into tblpersonas(Cedula, Nombre,Apellido,email,IDUsuario,IDRol)values(?,?,?,?,?,?)";
+    
+    public Ficha listar(int id){
+        String sql="SELECT * FROM tbl_ficha where PK_id_ficha=?";
+        Ficha Fc=new Ficha();
+
+        try {
+            con=cn.conexion();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,id);
+
+            rs=ps.executeQuery();
+
+            while (rs.next()){
+                Fc.setId(rs.getInt(1));
+                Fc.setNficha(rs.getString(2));
+                Fc.setFechaI(rs.getString(3));
+                Fc.setFechaF(rs.getString(4));
+                Fc.setFechaC(rs.getString(5));
+                Fc.setIdprogformacion(rs.getString(7));
+                Fc.setNombre(rs.getString(8));
+                
+                
+            }
+        } catch (Exception e) {
+            System.out.println("err: "+e);
+        }
+        return Fc;
+    }
+    
+    
+    public int agregar(Ficha fc){     
+        String sql="insert into tbl_ficha(numero_de_ficha, fecha_inicio, fecha_fin, FK_id_programa_formacion)values(?,?,?,?)";
         try {
             con=cn.conexion();
             ps=con.prepareStatement(sql);
             
-            ps.setString(1,pm.getcedula());
-            ps.setString(2,pm.getNombre());
-            ps.setString(3,pm.getapellido());
-            ps.setString(4,pm.getemail());
-            ps.setString(5,pm.getIduser());
-            ps.setString(6,pm.getIdrol());
+            ps.setString(1,fc.getNficha());
+            ps.setString(2,fc.getFechaI());
+            ps.setString(3,fc.getFechaF());
+            ps.setString(4,fc.getIdprogformacion());
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println("err"+e);
         }
         return r;
     }
-     public Personas listarId(int id){
+     /*public Personas listarId(int id){
         Personas emp=new Personas();
         String sql="select * from tblpersonas where IDPersonas="+id;
        
@@ -106,7 +159,7 @@ public class FichaDAO {
         } catch (Exception e) {
         }
         return emp;
-    } 
+    }*/ 
     public int Actualizar(Personas pm){
         String sql="update tblpersonas set Cedula=?, Nombre=?, Apellido=?, Email=?, IDUsuario=?, IDRol=? where IDPersonas=?";
         try {
@@ -125,16 +178,17 @@ public class FichaDAO {
         return r;
     }
     public void eliminar(int id){
-        String sql="delete from tblpersonas where IDPersonas="+id;
+        String sql="delete from tbl_ficha where PK_id_ficha="+id;
         try {
             con=cn.conexion();
             ps=con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println("err"+e);
         }
     }
 
-    public Object getuser() {
+    /*public Object getuser() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

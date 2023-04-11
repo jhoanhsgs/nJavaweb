@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -5,39 +7,43 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>JSP Page</title>
+    <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+
+
 </head>
 
 <body>
     <div class="d-flex">
         <div class="card col-sm-4">
             <div>
-                <form>
-                    <div class="form-group">
-                        <label>Dni</label>
-                        <input type="text" name="txtDni" class="form-control">
-                    </div>
+                <form action="controlador?menu=Ficha" method="POST">
+                    
                     <div class="form-group">
                         <label>NUMERO DE FICHA</label>
-                        <input type="text" name="txtNombres" class="form-control">
+                        <input type="text" value="${ficha.getNficha()}" name="txtNFicha" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label>NOMBRE</label>
-                        <input type="text" name="txtTelefonos" class="form-control">
-                    </div>
+                    
                     <div class="form-group">
                         <label>FECHA INICIO</label>
 
-                        <input type="date" name="txtEstado" class="form-control">
+                        <input type="date" value="${ficha.getFechaI()}" name="txtFechaIni" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>FECHA FIN</label>
-                        <input type="date" name="txtUsuario" class="form-control">
+                        <input type="date" value="${ficha.getFechaF()}" name="txtFechaFin" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>FECHA CREACION</label>
-                        <input type="datetime-local" name="txtUsuario" class="form-control">
+                        
+                        <label>PROGRAMA DE FORMACIÓN</label>
+                        <select name="program" class="custom-select">
+                            <c:forEach var="program" items="${programas}">
+                                <option value="${program.getId()}">${program.getNombre()}</option>
+                            </c:forEach>
+                        </select>
                     </div>
                     <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                    <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+
                 </form>
             </div>
         </div>
@@ -55,7 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="Fc" items="${fichas}">
+                    <c:forEach var="fc" items="${fichas}">
                         <tr>
                             <td>${fc.getId()}</td>
                             <td>${fc.getNficha()}</td>
@@ -64,8 +70,8 @@
                             <td>${fc.getFechaF()}</td>
                             <td>${fc.getFechaC()}</td>
                             <td>
-                                <a>Editar</a>
-                                <a>Eliminar</a>
+                                <a class="btn btn-warning btn-table" href="controlador?menu=Ficha&accion=Editar&id=${fc.getId()}">Editar</a>
+                                <a class="btn btn-danger btn-table" href="controlador?menu=Ficha&accion=Eliminar&id=${fc.getId()}">Eliminar</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -16,7 +16,7 @@
       <div class="row justify-content-center pt-5 mt-5 mr-1">
         <div class="col-md-4">
           <div class="card-body text-center">
-              <form name="login" class="form-sign" action="validar" method="POST">
+              <form name="login" class="form-sign" action="validar" method="POST" onsubmit="return Validar_UsuarioContraseña()">
                   <div class="user-img form-group">
                       <img src="img/portafolio.png"/>
                       <h2>Bienvenido al sistema</h2>
@@ -24,7 +24,7 @@
                   </div>
                   <div class="form-group mx-sm-4">
                       <label>Usuario:</label>
-                      <input type="text" name="txtuser" class="frm-control" placeholder="Ingresar su Usuario">
+                      <input type="text" name="txtuser" onkeypress="return " class="frm-control" placeholder="Ingresar su Usuario">
                   </div>
                   <div class="form-group mx-sm-4">
                       <label>Contraseña:</label>
@@ -39,12 +39,24 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script src="css/alertify.min.js" type="text/javascript"></script>
-
+<!-- Alertas -->
 <script>
     function Validar_UsuarioContraseña(){
         uss=document.login.txtuser.value;
         if (uss.length == 0){
-            aletify.alert("Error", "Ingrese su usuario").set('label', 'ok');
+            alertify.alert("Error", "Ingrese su usuario").set('label', 'ok');
+            return false;
+        }
+        else {
+            alertify.success("Bienvenido al sistema");
+            return true;
+        }
+    }
+    function validarText(){
+        tecla = e.keyCode;
+        teclado = String.fromCharCode(tecla);
+        if ((teclado < 'A' || teclado > 'z' && teclado != " "){
+            return false;
         }
     }
 </script>
